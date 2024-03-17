@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.factura.entities.TitularCuit" schema="gabriel" table="titular_cuit">
+        <id name="id" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="codigo" type="integer" column="CODIGO"/>
+        <property name="nombreFantasia" type="string" column="NOMBRE_FANTASIA"/>
+        <property name="razonSocial" type="string" column="RAZON_SOCIAL"/>
+        <property name="cuit" type="string" column="CUIT"/>
+        <property name="iibb" type="string" column="IIBB"/>
+        <property name="categoria" type="integer" column="CATEGORIA"/>
+        <property name="telefono" type="string" column="TELEFONO"/>
+        <property name="activo" type="boolean" column="ACTIVO"/>
+        <many-to-one name="domicilio"
+                    class="com.factura.entities.Domicilio"
+                     lazy="false">
+                     <column name="ID_DOMICILIO" not-null="false"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

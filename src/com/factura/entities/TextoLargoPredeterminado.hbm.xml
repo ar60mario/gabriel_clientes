@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.factura.entities.TextoLargoPredeterminado" schema="gabriel" table="texto_largo_predeterminado">
+        <id name="id" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="textoLargo" type="string" column="TEXTO_LARGO"/>
+        <many-to-one name="textoPredeterminado"
+                    class="com.factura.entities.TextoPredeterminado"
+                     lazy="false">
+                     <column name="ID_TEXTO_PREDETERMINADO" not-null="false"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
