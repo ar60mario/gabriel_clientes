@@ -330,7 +330,9 @@ public class AbmConsorciosFrame extends javax.swing.JFrame {
             return;
         }
         Consorcio co = consorcios.get(row);
-        
+        ModificarConsorcioFrame mcf = new ModificarConsorcioFrame(co);
+        mcf.setVisible(true);
+        this.dispose();
     }
 
     private void primero() {

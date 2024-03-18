@@ -6,22 +6,29 @@
 package com.factura.frame;
 
 import com.factura.entities.Categoria;
+import com.factura.entities.Domicilio;
 import com.factura.entities.TitularCuit;
 import com.factura.structure.Constantes;
 import com.factura.main.MainFrame;
+import com.factura.service.CategoriaService;
+import com.factura.service.TitularCuitService;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author argia
  */
-public class nuevoTitularFrame extends javax.swing.JFrame {
+public class NuevoTitularFrame extends javax.swing.JFrame {
 
     private List<Categoria> categorias;
+
     /**
      * Creates new form AbmTitularesFrame
      */
-    public nuevoTitularFrame() {
+    public NuevoTitularFrame() {
         initComponents();
         getContentPane().setBackground(new java.awt.Color(Constantes.getR(), Constantes.getG(), Constantes.getB()));
         this.setLocationRelativeTo(null);
@@ -63,9 +70,11 @@ public class nuevoTitularFrame extends javax.swing.JFrame {
         iibbTxt = new javax.swing.JTextField();
         combo = new javax.swing.JComboBox<>();
         codigoTxt = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        telefonoTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("ABM TITULARES DE CUIT");
+        setTitle("NUEVO TITULAR DE CUIT");
 
         volverBtn.setText("VOLVER");
         volverBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +138,10 @@ public class nuevoTitularFrame extends javax.swing.JFrame {
 
         codigoTxt.setText("CODIGO");
 
+        jLabel13.setText("TELEFONO:");
+
+        telefonoTxt.setText("TELEFONO");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,16 +155,6 @@ public class nuevoTitularFrame extends javax.swing.JFrame {
                         .addComponent(volverBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cuitTxt)
-                                    .addComponent(iibbTxt)
-                                    .addComponent(combo, 0, 200, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -173,7 +176,19 @@ public class nuevoTitularFrame extends javax.swing.JFrame {
                                     .addComponent(codigoPostalTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(localidadTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(provinciaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(codigoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(codigoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cuitTxt)
+                                    .addComponent(iibbTxt)
+                                    .addComponent(combo, 0, 200, Short.MAX_VALUE)
+                                    .addComponent(telefonoTxt))))
                         .addGap(0, 28, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -228,7 +243,11 @@ public class nuevoTitularFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(telefonoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(volverBtn)
                     .addComponent(grabarBtn))
@@ -263,21 +282,23 @@ public class nuevoTitularFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(nuevoTitularFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoTitularFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(nuevoTitularFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoTitularFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(nuevoTitularFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoTitularFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(nuevoTitularFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoTitularFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new nuevoTitularFrame().setVisible(true);
+                new NuevoTitularFrame().setVisible(true);
             }
         });
     }
@@ -294,6 +315,7 @@ public class nuevoTitularFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -308,6 +330,7 @@ public class nuevoTitularFrame extends javax.swing.JFrame {
     private javax.swing.JTextField pisoDtoTxt;
     private javax.swing.JTextField provinciaTxt;
     private javax.swing.JTextField razonSocialTxt;
+    private javax.swing.JTextField telefonoTxt;
     private javax.swing.JButton volverBtn;
     // End of variables declaration//GEN-END:variables
 
@@ -318,10 +341,36 @@ public class nuevoTitularFrame extends javax.swing.JFrame {
     }
 
     private void grabar() {
-        if(validar()){
+        if (validar()) {
             TitularCuit titular = new TitularCuit();
+            int row = combo.getSelectedIndex();
+            Integer codigo = Integer.valueOf(codigoTxt.getText());
+            Domicilio dm = new Domicilio();
+            dm.setCalle(calleTxt.getText());
+            dm.setCodigoPostal(codigoPostalTxt.getText());
+            dm.setLocalidad(localidadTxt.getText());
+            dm.setNumero(numeroTxt.getText());
+            dm.setPisoDto(pisoDtoTxt.getText());
+            dm.setProvincia(provinciaTxt.getText());
+            Categoria ca = categorias.get(row - 1);
             titular.setActivo(true);
-            titular.setCategoria(ABORT);
+            titular.setCategoria(ca);
+            titular.setCodigo(codigo);
+            titular.setCuit(cuitTxt.getText());
+            titular.setDomicilio(dm);
+            titular.setIibb(iibbTxt.getText());
+            titular.setNombreFantasia(nombreFantasiaTxt.getText());
+            titular.setRazonSocial(razonSocialTxt.getText());
+            titular.setTelefono(telefonoTxt.getText());
+            try {
+                new TitularCuitService().saveTitularCuit(titular);
+            } catch (Exception ex) {
+//                Logger.getLogger(NuevoTitularFrame.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERROR");
+                return;
+            }
+            JOptionPane.showMessageDialog(this, "TITULAR GUARDADO CORRECTAMNTE");
+            volver();
         }
     }
 
@@ -329,7 +378,6 @@ public class nuevoTitularFrame extends javax.swing.JFrame {
         categorias = null;
         combo.removeAllItems();
         combo.addItem("");
-        codigoTxt.setText("");
         razonSocialTxt.setText("");
         nombreFantasiaTxt.setText("");
         calleTxt.setText("");
@@ -340,10 +388,41 @@ public class nuevoTitularFrame extends javax.swing.JFrame {
         provinciaTxt.setText("");
         iibbTxt.setText("");
         cuitTxt.setText("");
-        
+        telefonoTxt.setText("");
+        Integer codigo;
+        try {
+            codigo = new TitularCuitService().getCodigoSiguiente();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERROR");
+            return;
+        }
+        codigo +=1;
+        try {
+            categorias = new CategoriaService().getAllCategoriasActivas();
+        } catch (Exception ex) {
+            Logger.getLogger(NuevoTitularFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        codigoTxt.setText(codigo.toString());
+        nombreFantasiaTxt.requestFocus();
+        for(Categoria ca:categorias){
+            combo.addItem(ca.getNombreCategoria());
+        }
     }
 
     private boolean validar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = combo.getSelectedIndex();
+        if (row < 1) {
+            JOptionPane.showMessageDialog(this, "DEBE ELEGIR UNA CATEGORIA PARA ESTE TITULAR");
+            combo.requestFocus();
+            return false;
+        }
+        try {
+            Integer.valueOf(codigoTxt.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "EL CODIGO DEBE SER UN NUMERO");
+            System.out.println(ex);
+            return false;
+        }
+        return true;
     }
 }

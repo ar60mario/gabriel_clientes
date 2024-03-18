@@ -1,7 +1,9 @@
 package com.factura.service;
 
-import com.factura.bo.AdministradorBo;
-import com.factura.entities.Administrador;
+import com.factura.bo.TextoLargoPredeterminadoBo;
+import com.factura.bo.TextoPredeterminadoBo;
+import com.factura.entities.TextoLargoPredeterminado;
+import com.factura.entities.TextoPredeterminado;
 import com.factura.util.HibernateUtils;
 import java.util.List;
 import org.hibernate.Session;
@@ -10,26 +12,40 @@ import org.hibernate.Transaction;
 public class TextoPredeterminadoService {
 
     
-    public List<Administrador> getAllAdministradoresActivos() throws Exception {
-        List<Administrador> administradores = null;
+    public List<TextoPredeterminado> getAllTextoPredeterminadosActivos() throws Exception {
+        List<TextoPredeterminado> textos = null;
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
         try {
-            administradores = new AdministradorBo().getAllAdministradoresActivos();
+            textos = new TextoPredeterminadoBo().getAllTextoPredeterminadoActivos();
             tx.commit();
         } catch (Exception ex) {
             tx.rollback();
             throw new Exception(ex);
         }
-        return administradores;
+        return textos;
     }
     
-    public Integer getUltimoCodigoAdministrador() throws Exception {
+    public List<TextoPredeterminado> getAllTextoPredeterminados() throws Exception {
+        List<TextoPredeterminado> textos = null;
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            textos = new TextoPredeterminadoBo().getAllTextoPredeterminado();
+            tx.commit();
+        } catch (Exception ex) {
+            tx.rollback();
+            throw new Exception(ex);
+        }
+        return textos;
+    }
+    
+    public Integer getUltimoCodigoTextoPredeterminado() throws Exception {
         Integer cod = 0;
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
         try {
-            cod = new AdministradorBo().getUltimoCodigoAdministrador();
+            cod = new TextoPredeterminadoBo().getUltimoCodigoTextoPredeterminado();
             tx.commit();
         } catch (Exception ex) {
             tx.rollback();
@@ -38,30 +54,30 @@ public class TextoPredeterminadoService {
         return cod;
     }
     
-    public Administrador saveAdministrador(Administrador administrador) throws Exception {
+    public TextoPredeterminado saveTextoPredeterminado(TextoPredeterminado texto) throws Exception {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
         try {
-            administrador = new AdministradorBo().saveAdministrador(administrador);
+            texto = new TextoPredeterminadoBo().saveTextoPredeterminado(texto);
             tx.commit();
         } catch (Exception ex) {
             tx.rollback();
             throw new Exception(ex);
         }
-        return administrador;
+        return texto;
     }
     
-    public Administrador updateAdministrador(Administrador administrador) throws Exception {
+    public TextoPredeterminado updateTextoPredeterminado(TextoPredeterminado texto) throws Exception {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
         try {
-            administrador = new AdministradorBo().updateAdministrador(administrador);
+            texto = new TextoPredeterminadoBo().updateTextoPredeterminado(texto);
             tx.commit();
         } catch (Exception ex) {
             tx.rollback();
             throw new Exception(ex);
         }
-        return administrador;
+        return texto;
     }
     
 //    public List<Administrador> getAllAdministradoresInactivos() throws Exception {

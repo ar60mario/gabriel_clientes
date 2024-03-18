@@ -5,14 +5,24 @@
  */
 package com.factura.frame;
 
+import com.factura.entities.TextoPredeterminado;
 import com.factura.structure.Constantes;
 import com.factura.main.MainFrame;
+import com.factura.service.TextoPredeterminadoService;
+import com.factura.util.UtilFrame;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author argia
  */
 public class AbmTextoPredeteriminadoFrame extends javax.swing.JFrame {
+
+    private List<TextoPredeterminado> textos;
 
     /**
      * Creates new form AbmTextoPredeteriminadoFrame
@@ -21,6 +31,9 @@ public class AbmTextoPredeteriminadoFrame extends javax.swing.JFrame {
         initComponents();
         getContentPane().setBackground(new java.awt.Color(Constantes.getR(), Constantes.getG(), Constantes.getB()));
         this.setLocationRelativeTo(null);
+        limpiarCampos();
+        cargarTextos();
+        llenarTabla();
     }
 
     /**
@@ -33,8 +46,17 @@ public class AbmTextoPredeteriminadoFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         volverBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        filtroTxt = new javax.swing.JTextField();
+        nuevoBtn = new javax.swing.JButton();
+        modificarBtn = new javax.swing.JButton();
+        activarBtn = new javax.swing.JButton();
+        desactivarBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("ABM TEXTOS PREDETERIMINADOS");
 
         volverBtn.setText("VOLVER");
         volverBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -43,20 +65,102 @@ public class AbmTextoPredeteriminadoFrame extends javax.swing.JFrame {
             }
         });
 
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CODIGO", "DESCRIPCION", "ACTIVO"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(50);
+        }
+
+        jLabel1.setText("FILTRO:");
+
+        filtroTxt.setText("FILTRO");
+
+        nuevoBtn.setText("NUEVO");
+        nuevoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoBtnActionPerformed(evt);
+            }
+        });
+
+        modificarBtn.setText("MODIFICAR");
+        modificarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarBtnActionPerformed(evt);
+            }
+        });
+
+        activarBtn.setText("ACTIVAR");
+        activarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                activarBtnActionPerformed(evt);
+            }
+        });
+
+        desactivarBtn.setText("DESACTIVAR");
+        desactivarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desactivarBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(319, Short.MAX_VALUE)
-                .addComponent(volverBtn)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(nuevoBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(modificarBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(activarBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(desactivarBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                        .addComponent(volverBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(filtroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(266, Short.MAX_VALUE)
-                .addComponent(volverBtn)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(filtroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(volverBtn)
+                    .addComponent(nuevoBtn)
+                    .addComponent(modificarBtn)
+                    .addComponent(activarBtn)
+                    .addComponent(desactivarBtn))
                 .addContainerGap())
         );
 
@@ -66,6 +170,22 @@ public class AbmTextoPredeteriminadoFrame extends javax.swing.JFrame {
     private void volverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBtnActionPerformed
         volver();
     }//GEN-LAST:event_volverBtnActionPerformed
+
+    private void desactivarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desactivarBtnActionPerformed
+        desactivar();
+    }//GEN-LAST:event_desactivarBtnActionPerformed
+
+    private void activarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activarBtnActionPerformed
+        activar();
+    }//GEN-LAST:event_activarBtnActionPerformed
+
+    private void modificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBtnActionPerformed
+        modificar();
+    }//GEN-LAST:event_modificarBtnActionPerformed
+
+    private void nuevoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoBtnActionPerformed
+        nuevo();
+    }//GEN-LAST:event_nuevoBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,6 +223,14 @@ public class AbmTextoPredeteriminadoFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton activarBtn;
+    private javax.swing.JButton desactivarBtn;
+    private javax.swing.JTextField filtroTxt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton modificarBtn;
+    private javax.swing.JButton nuevoBtn;
+    private javax.swing.JTable tabla;
     private javax.swing.JButton volverBtn;
     // End of variables declaration//GEN-END:variables
 
@@ -110,5 +238,95 @@ public class AbmTextoPredeteriminadoFrame extends javax.swing.JFrame {
         MainFrame mf = new MainFrame();
         mf.setVisible(true);
         this.dispose();
+    }
+
+    private void nuevo() {
+        NuevoTextoPredeterminadoFrame ntpf = new NuevoTextoPredeterminadoFrame();
+        ntpf.setVisible(true);
+        this.dispose();
+    }
+
+    private void modificar() {
+        int row = tabla.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "SELECCIONE UN TEXTO PARA MODIFICAR");
+            return;
+        }
+        TextoPredeterminado tp = textos.get(row);
+        ModificarTextoPredeterminadoFrame mtpf = new ModificarTextoPredeterminadoFrame(tp);
+        mtpf.setVisible(true);
+        this.dispose();
+    }
+
+    private void activar() {
+        int row = tabla.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "SELECCIONE");
+            return;
+        }
+        TextoPredeterminado tp = textos.get(row);
+        tp.setActivo(true);
+        int a = JOptionPane.showConfirmDialog(this, "CONFIRMA ACTIVAR TEXTO?", "Atención", JOptionPane.YES_NO_OPTION);
+        if (a == 0) {
+            try {
+                new TextoPredeterminadoService().updateTextoPredeterminado(tp);
+            } catch (Exception ex) {
+                Logger.getLogger(AbmTextoPredeteriminadoFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            limpiarCampos();
+            llenarTabla();
+        }
+    }
+
+    private void desactivar() {
+        int row = tabla.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "SELECCIONE");
+            return;
+        }
+        TextoPredeterminado tp = textos.get(row);
+        tp.setActivo(false);
+        int a = JOptionPane.showConfirmDialog(this, "CONFIRMA DESACTIVAR TEXTO?", "Atención", JOptionPane.YES_NO_OPTION);
+        if (a == 0) {
+            try {
+                new TextoPredeterminadoService().updateTextoPredeterminado(tp);
+            } catch (Exception ex) {
+                Logger.getLogger(AbmTextoPredeteriminadoFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            limpiarCampos();
+            llenarTabla();
+        }
+    }
+
+    private void limpiarCampos() {
+        filtroTxt.setText("");
+    }
+
+    private void cargarTextos() {
+        textos = null;
+        try {
+            textos = new TextoPredeterminadoService().getAllTextoPredeterminados();
+        } catch (Exception ex) {
+            Logger.getLogger(AbmTextoPredeteriminadoFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void llenarTabla() {
+        UtilFrame.limpiarTabla(tabla);
+        if (textos != null && !textos.isEmpty()) {
+            DefaultTableModel tbl = (DefaultTableModel) tabla.getModel();
+            for (TextoPredeterminado tp : textos) {
+                Object o[] = new Object[3];
+                o[0] = tp.getCodigo();
+                o[1] = tp.getDescripcion();
+                if (tp.getActivo()) {
+                    o[2] = "ACT";
+                } else {
+                    o[2] = "inact";
+                }
+                tbl.addRow(o);
+            }
+            tabla.setModel(tbl);
+        }
     }
 }

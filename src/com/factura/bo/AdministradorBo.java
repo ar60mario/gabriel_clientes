@@ -30,6 +30,16 @@ public class AdministradorBo {
         return administradores;
     }
 
+    public List<Administrador> getAllAdministradoresInactivos() throws Exception {
+        List<Administrador> administradores = null;
+        try {
+            administradores = dao.getAllAdministradoresInactivos();
+        } catch (HibernateException ex) {
+            throw new Exception(ex);
+        }
+        return administradores;
+    }
+    
     public Integer getUltimoCodigoAdministrador() throws Exception {
         Integer cod = 0;
         try {

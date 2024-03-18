@@ -3,11 +3,10 @@
  */
 package com.factura.bo;
 
-import com.factura.dao.AdministradorDao;
-import com.factura.entities.Administrador;
-import com.factura.entities.Domicilio;
+import com.factura.dao.TextoPredeterminadoDao;
+import com.factura.entities.TextoLargoPredeterminado;
+import com.factura.entities.TextoPredeterminado;
 import java.util.List;
-import java.util.logging.Logger;
 import org.hibernate.HibernateException;
 
 /**
@@ -16,64 +15,61 @@ import org.hibernate.HibernateException;
  */
 public class TextoPredeterminadoBo {
 
-    private final AdministradorDao dao = new AdministradorDao();
+    private final TextoPredeterminadoDao dao = new TextoPredeterminadoDao();
 
-    private static final Logger logger = Logger.getLogger("AdministradorBO");
-
-    public List<Administrador> getAllAdministradoresActivos() throws Exception {
-        List<Administrador> administradores = null;
+//    private static final Logger logger = Logger.getLogger("AdministradorBO");
+    public List<TextoPredeterminado> getAllTextoPredeterminadoActivos() throws Exception {
+        List<TextoPredeterminado> textos = null;
         try {
-            administradores = dao.getAllAdministradoresActivos();
+            textos = dao.getAllTextoPredeterminadoActivos();
         } catch (HibernateException ex) {
             throw new Exception(ex);
         }
-        return administradores;
+        return textos;
+    }
+    
+    public List<TextoPredeterminado> getAllTextoPredeterminado() throws Exception {
+        List<TextoPredeterminado> textos = null;
+        try {
+            textos = dao.getAllTextoPredeterminado();
+        } catch (HibernateException ex) {
+            throw new Exception(ex);
+        }
+        return textos;
     }
 
-    public Integer getUltimoCodigoAdministrador() throws Exception {
+    public Integer getUltimoCodigoTextoPredeterminado() throws Exception {
         Integer cod = 0;
         try {
-            cod = dao.getUltimoCodigoAdministrador();
+            cod = dao.getUltimoCodigoTextoPredeterminado();
         } catch (HibernateException ex) {
             throw new Exception(ex);
         }
         return cod;
     }
 
-    public Administrador saveAdministrador(Administrador administrador) throws Exception {
-        DomicilioBo domicilioBO = new DomicilioBo();
-        Administrador adm1 = null;
-        Domicilio domicilio = administrador.getDomicilio();
+    public TextoPredeterminado saveTextoPredeterminado(TextoPredeterminado texto) throws Exception {
+        TextoLargoPredeterminado tlp = texto.getTextoLargoPredeterminado();
+        tlp = new TextoLargoPredeterminadoBo().saveTextoLargoPredeterminado(tlp);
+        texto.setTextoLargoPredeterminado(tlp);
         try {
-            domicilio = domicilioBO.saveDomicilio(domicilio);
-        } catch (HibernateException ex1) {
-            throw new Exception(ex1);
-        }
-        administrador.setDomicilio(domicilio);
-        try {
-            adm1 = (Administrador) dao.save(administrador);
+            texto = (TextoPredeterminado) dao.save(texto);
         } catch (HibernateException ex) {
             throw new Exception(ex);
         }
-        return adm1;
+        return texto;
     }
-    
-    public Administrador updateAdministrador(Administrador administrador) throws Exception {
-        DomicilioBo domicilioBO = new DomicilioBo();
-        Administrador adm1 = null;
-        Domicilio domicilio = administrador.getDomicilio();
+
+    public TextoPredeterminado updateTextoPredeterminado(TextoPredeterminado texto) throws Exception {
+        TextoLargoPredeterminado tlp = texto.getTextoLargoPredeterminado();
+        tlp = new TextoLargoPredeterminadoBo().updateTextoLargoPredeterminado(tlp);
+        texto.setTextoLargoPredeterminado(tlp);
         try {
-            domicilio = domicilioBO.updateDomicilio(domicilio);
-        } catch (HibernateException ex1) {
-            throw new Exception(ex1);
-        }
-        administrador.setDomicilio(domicilio);
-        try {
-            adm1 = (Administrador) dao.update(administrador);
+            texto = (TextoPredeterminado) dao.update(texto);
         } catch (HibernateException ex) {
             throw new Exception(ex);
         }
-        return adm1;
+        return texto;
     }
 
 //    public List<Administrador> getAllAdministradoresInactivos() throws Exception {

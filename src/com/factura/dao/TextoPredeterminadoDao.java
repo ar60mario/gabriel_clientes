@@ -5,11 +5,10 @@
  */
 package com.factura.dao;
 
-import com.factura.entities.Administrador;
+import com.factura.entities.TextoPredeterminado;
 import com.factura.util.HibernateUtils;
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -20,25 +19,33 @@ import org.hibernate.criterion.Restrictions;
  */
 public class TextoPredeterminadoDao extends GenericDao {
 
-    public List<Administrador> getAllAdministradoresActivos() {
+    public List<TextoPredeterminado> getAllTextoPredeterminadoActivos() {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        Criteria criteria = session.createCriteria(Administrador.class);
+        Criteria criteria = session.createCriteria(TextoPredeterminado.class);
         criteria.add(Restrictions.eq("activo", true));
-        List<Administrador> administradores = (List<Administrador>) criteria.list();
+        List<TextoPredeterminado> administradores = (List<TextoPredeterminado>) criteria.list();
+        return administradores;
+    }
+    
+    public List<TextoPredeterminado> getAllTextoPredeterminado() {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Criteria criteria = session.createCriteria(TextoPredeterminado.class);
+//        criteria.add(Restrictions.eq("activo", true));
+        List<TextoPredeterminado> administradores = (List<TextoPredeterminado>) criteria.list();
         return administradores;
     }
 
-    public Integer getUltimoCodigoAdministrador() {
+    public Integer getUltimoCodigoTextoPredeterminado() {
         Integer cod = 0;
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-        Criteria criteria = session.createCriteria(Administrador.class);
+        Criteria criteria = session.createCriteria(TextoPredeterminado.class);
         criteria.add(Restrictions.eq("activo", true));
         criteria.addOrder(Order.desc("codigo"));
         criteria.setMaxResults(3);
-        List<Administrador> tds = (List<Administrador>) criteria.list();
+        List<TextoPredeterminado> tds = (List<TextoPredeterminado>) criteria.list();
         if (!tds.isEmpty()) {
             cod = tds.get(0).getCodigo();
-            for (Administrador os : tds) {
+            for (TextoPredeterminado os : tds) {
                 System.out.println(os.getId());
             }
         }

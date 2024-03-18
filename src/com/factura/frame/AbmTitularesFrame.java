@@ -6,7 +6,10 @@
 package com.factura.frame;
 
 import com.factura.entities.TitularCuit;
+import com.factura.main.MainFrame;
 import com.factura.service.TitularCuitService;
+import com.factura.structure.Constantes;
+import com.factura.util.UtilFrame;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +28,8 @@ public class AbmTitularesFrame extends javax.swing.JFrame {
      */
     public AbmTitularesFrame() {
         initComponents();
+        getContentPane().setBackground(new java.awt.Color(Constantes.getR(), Constantes.getG(), Constantes.getB()));
+        this.setLocationRelativeTo(null);
         cargarTitulares();
         llenarTabla();
     }
@@ -43,6 +48,8 @@ public class AbmTitularesFrame extends javax.swing.JFrame {
         nuevoBtn = new javax.swing.JButton();
         modificarBtn = new javax.swing.JButton();
         volverBtn = new javax.swing.JButton();
+        activarBtn = new javax.swing.JButton();
+        desactivarBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("ABM TITULARES DE CUIT");
@@ -92,6 +99,20 @@ public class AbmTitularesFrame extends javax.swing.JFrame {
             }
         });
 
+        activarBtn.setText("ACTIVAR");
+        activarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                activarBtnActionPerformed(evt);
+            }
+        });
+
+        desactivarBtn.setText("DESACTIVAR");
+        desactivarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desactivarBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,6 +125,10 @@ public class AbmTitularesFrame extends javax.swing.JFrame {
                         .addComponent(nuevoBtn)
                         .addGap(18, 18, 18)
                         .addComponent(modificarBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(activarBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(desactivarBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(volverBtn)))
                 .addContainerGap())
@@ -117,7 +142,9 @@ public class AbmTitularesFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nuevoBtn)
                     .addComponent(modificarBtn)
-                    .addComponent(volverBtn))
+                    .addComponent(volverBtn)
+                    .addComponent(activarBtn)
+                    .addComponent(desactivarBtn))
                 .addContainerGap())
         );
 
@@ -135,6 +162,14 @@ public class AbmTitularesFrame extends javax.swing.JFrame {
     private void volverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBtnActionPerformed
         volver();
     }//GEN-LAST:event_volverBtnActionPerformed
+
+    private void activarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activarBtnActionPerformed
+        activar();
+    }//GEN-LAST:event_activarBtnActionPerformed
+
+    private void desactivarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desactivarBtnActionPerformed
+        desactivar();
+    }//GEN-LAST:event_desactivarBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +207,8 @@ public class AbmTitularesFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton activarBtn;
+    private javax.swing.JButton desactivarBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificarBtn;
     private javax.swing.JButton nuevoBtn;
@@ -186,6 +223,7 @@ public class AbmTitularesFrame extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(AbmTitularesFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        UtilFrame.limpiarTabla(tabla);
     }
 
     private void llenarTabla() {
@@ -196,8 +234,8 @@ public class AbmTitularesFrame extends javax.swing.JFrame {
                 o[0] = tc.getCodigo();
                 o[1] = tc.getRazonSocial();
                 o[2] = tc.getCuit();
-                int catego = tc.getCategoria();
-
+                String catego = tc.getCategoria().getNombreCategoria();
+                o[3] = catego;
                 if (tc.getActivo()) {
                     o[4] = "ACTIVO";
                 } else {
@@ -210,14 +248,26 @@ public class AbmTitularesFrame extends javax.swing.JFrame {
     }
 
     private void volver() {
-        
+        MainFrame mf = new MainFrame();
+        mf.setVisible(true);
+        this.dispose();
     }
 
     private void modificar() {
-        
+
     }
 
     private void nuevo() {
-        
+        NuevoTitularFrame ntf = new NuevoTitularFrame();
+        ntf.setVisible(true);
+        this.dispose();
+    }
+
+    private void activar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void desactivar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -7,11 +7,6 @@
         <id name="id" column="ID">
             <generator class="identity"/>
         </id>
-        <property name="textoLargo" type="string" column="TEXTO_LARGO"/>
-        <many-to-one name="textoPredeterminado"
-                    class="com.factura.entities.TextoPredeterminado"
-                     lazy="false">
-                     <column name="ID_TEXTO_PREDETERMINADO" not-null="false"/>
-        </many-to-one>
+        <property name="textoLargo" type="text" column="TEXTO_LARGO"/>
     </class>
 </hibernate-mapping>

@@ -6,6 +6,7 @@
 package com.factura.bo;
 
 import com.factura.dao.TitularCuitDao;
+import com.factura.entities.Domicilio;
 import com.factura.entities.TitularCuit;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -25,20 +26,33 @@ public class TitularCuitBo {
         }
         return codigo;
     }
-    /*
-    public Consorcio saveConsorcio(Consorcio consorcio) throws Exception {
+    
+    public TitularCuit saveTitularCuit(TitularCuit titular) throws Exception {
         DomicilioBo domicilioBO = new DomicilioBo();
-        Domicilio domicilio = consorcio.getDomicilio();
+        Domicilio domicilio = titular.getDomicilio();
         domicilio = domicilioBO.saveDomicilio(domicilio);
-        consorcio.setDomicilio(domicilio);
+        titular.setDomicilio(domicilio);
         try {
-            dao.save(consorcio);
+            dao.save(titular);
         } catch (HibernateException ex) {
             throw new Exception(ex);
         }
-        return consorcio;
+        return titular;
     }
     
+    public TitularCuit updateTitularCuit(TitularCuit titular) throws Exception {
+        DomicilioBo domicilioBO = new DomicilioBo();
+        Domicilio domicilio = titular.getDomicilio();
+        domicilio = domicilioBO.saveDomicilio(domicilio);
+        titular.setDomicilio(domicilio);
+        try {
+            dao.update(titular);
+        } catch (HibernateException ex) {
+            throw new Exception(ex);
+        }
+        return titular;
+    }
+    /*
     public Consorcio updateConsorcio(Consorcio consorcio) throws Exception {
         DomicilioBo domicilioBO = new DomicilioBo();
         Domicilio domicilio = consorcio.getDomicilio();

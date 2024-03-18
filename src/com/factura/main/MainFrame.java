@@ -11,7 +11,8 @@ import com.factura.frame.AbmAdministradoresFrame;
 import com.factura.frame.AbmCategoriasFrame;
 import com.factura.frame.AbmConsorciosFrame;
 import com.factura.frame.AbmTextoPredeteriminadoFrame;
-import com.factura.frame.nuevoTitularFrame;
+import com.factura.frame.AbmTitularesFrame;
+import com.factura.frame.NuevoTitularFrame;
 import com.factura.frame.FacturaFrame;
 import com.factura.frame.NotaCreditoFrame;
 import com.factura.frame.NuevaCompleta2Frame;
@@ -138,7 +139,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jMenu1.add(abmClientesMnu);
 
-        abmTextosMnu.setText("TEXTOS PREDTERMINADOS");
+        abmTextosMnu.setText("TEXTOS PREDETERMINADOS");
         abmTextosMnu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abmTextosMnuActionPerformed(evt);
@@ -338,7 +339,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void titulares() {
-        nuevoTitularFrame atf = new nuevoTitularFrame();
+        AbmTitularesFrame atf = new AbmTitularesFrame();
         atf.setVisible(true);
         this.dispose();
     }

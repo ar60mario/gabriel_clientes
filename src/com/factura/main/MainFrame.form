@@ -35,7 +35,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="abmTextosMnu">
               <Properties>
-                <Property name="text" type="java.lang.String" value="TEXTOS PREDTERMINADOS"/>
+                <Property name="text" type="java.lang.String" value="TEXTOS PREDETERMINADOS"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="abmTextosMnuActionPerformed"/>

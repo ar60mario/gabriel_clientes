@@ -24,6 +24,16 @@ public class AdministradorDao extends GenericDao {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Criteria criteria = session.createCriteria(Administrador.class);
         criteria.add(Restrictions.eq("activo", true));
+        criteria.addOrder(Order.asc("nombre"));
+        List<Administrador> administradores = (List<Administrador>) criteria.list();
+        return administradores;
+    }
+    
+    public List<Administrador> getAllAdministradoresInactivos() {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Criteria criteria = session.createCriteria(Administrador.class);
+        criteria.add(Restrictions.eq("activo", false));
+        criteria.addOrder(Order.asc("nombre"));
         List<Administrador> administradores = (List<Administrador>) criteria.list();
         return administradores;
     }

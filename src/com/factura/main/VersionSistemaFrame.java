@@ -20,7 +20,7 @@ public class VersionSistemaFrame extends javax.swing.JFrame {
         initComponents();
         getContentPane().setBackground(new java.awt.Color(Constantes.getR(), Constantes.getG(), Constantes.getB()));
         this.setLocationRelativeTo(null);
-        versTxt.setText("VERSIÓN FEBRERO 28 2024 v:a");
+        versTxt.setText("VERSIÓN MARZO 19 2024 v:a");
     }
 
     /**

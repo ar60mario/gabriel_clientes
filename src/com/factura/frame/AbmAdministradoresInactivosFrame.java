@@ -21,14 +21,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author argia
  */
-public class AbmAdministradoresFrame extends javax.swing.JFrame {
+public class AbmAdministradoresInactivosFrame extends javax.swing.JFrame {
 
     private List<Administrador> administradores;
 
     /**
      * Creates new form AbmAdministradoresFrame
      */
-    public AbmAdministradoresFrame() {
+    public AbmAdministradoresInactivosFrame() {
         initComponents();
         getContentPane().setBackground(new java.awt.Color(Constantes.getR(), Constantes.getG(), Constantes.getB()));
         this.setLocationRelativeTo(null);
@@ -49,14 +49,12 @@ public class AbmAdministradoresFrame extends javax.swing.JFrame {
         volverBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        nuevoBtn = new javax.swing.JButton();
-        modificarBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         filtroTxt = new javax.swing.JTextField();
-        inactivosBtn = new javax.swing.JButton();
+        activarBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("ALTAS BAJAS Y MODIFICACIONES DE ADMINISTRADORES");
+        setTitle("ADMINISTRADORES INACTIVOS");
 
         volverBtn.setText("VOLVER");
         volverBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -75,20 +73,6 @@ public class AbmAdministradoresFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        nuevoBtn.setText("NUEVO");
-        nuevoBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nuevoBtnActionPerformed(evt);
-            }
-        });
-
-        modificarBtn.setText("MODIFICAR");
-        modificarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarBtnActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("NOMBRE:");
 
         filtroTxt.setText("FILTRO");
@@ -98,10 +82,10 @@ public class AbmAdministradoresFrame extends javax.swing.JFrame {
             }
         });
 
-        inactivosBtn.setText("INACTIVOS");
-        inactivosBtn.addActionListener(new java.awt.event.ActionListener() {
+        activarBtn.setText("ATIVAR");
+        activarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inactivosBtnActionPerformed(evt);
+                activarBtnActionPerformed(evt);
             }
         });
 
@@ -113,11 +97,7 @@ public class AbmAdministradoresFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(nuevoBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(modificarBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(inactivosBtn)
+                        .addComponent(activarBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(volverBtn))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
@@ -140,9 +120,7 @@ public class AbmAdministradoresFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(volverBtn)
-                    .addComponent(nuevoBtn)
-                    .addComponent(modificarBtn)
-                    .addComponent(inactivosBtn))
+                    .addComponent(activarBtn))
                 .addContainerGap())
         );
 
@@ -152,19 +130,6 @@ public class AbmAdministradoresFrame extends javax.swing.JFrame {
     private void volverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBtnActionPerformed
         volver();
     }//GEN-LAST:event_volverBtnActionPerformed
-
-    private void nuevoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoBtnActionPerformed
-        nuevo();
-    }//GEN-LAST:event_nuevoBtnActionPerformed
-
-    private void modificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBtnActionPerformed
-        int row = tabla.getSelectedRow();
-        if (row < 0) {
-            JOptionPane.showMessageDialog(this, "SELECCIONE ADMINISTRADOR A MODIFICAR");
-            return;
-        }
-        modificar(row);
-    }//GEN-LAST:event_modificarBtnActionPerformed
 
     private void filtroTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroTxtKeyPressed
         if (evt.getKeyCode() == 10) {
@@ -177,9 +142,9 @@ public class AbmAdministradoresFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_filtroTxtKeyPressed
 
-    private void inactivosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inactivosBtnActionPerformed
-        inactivos();
-    }//GEN-LAST:event_inactivosBtnActionPerformed
+    private void activarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activarBtnActionPerformed
+        activar();
+    }//GEN-LAST:event_activarBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,37 +163,36 @@ public class AbmAdministradoresFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AbmAdministradoresFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbmAdministradoresInactivosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AbmAdministradoresFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbmAdministradoresInactivosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AbmAdministradoresFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbmAdministradoresInactivosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AbmAdministradoresFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbmAdministradoresInactivosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AbmAdministradoresFrame().setVisible(true);
+                new AbmAdministradoresInactivosFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton activarBtn;
     private javax.swing.JTextField filtroTxt;
-    private javax.swing.JButton inactivosBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton modificarBtn;
-    private javax.swing.JButton nuevoBtn;
     private javax.swing.JTable tabla;
     private javax.swing.JButton volverBtn;
     // End of variables declaration//GEN-END:variables
 
     private void volver() {
-        MainFrame mf = new MainFrame();
+        AbmAdministradoresFrame mf = new AbmAdministradoresFrame();
         mf.setVisible(true);
         this.dispose();
     }
@@ -252,32 +216,43 @@ public class AbmAdministradoresFrame extends javax.swing.JFrame {
     private void cargarLista() {
         administradores = null;
         try {
-            administradores = new AdministradorService().getAllAdministradoresActivos();
+            administradores = new AdministradorService().getAllAdministradoresInactivos();
         } catch (Exception ex) {
-            Logger.getLogger(AbmAdministradoresFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AbmAdministradoresInactivosFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void nuevo() {
-        NuevoAdministradorFrame naf = new NuevoAdministradorFrame();
-        naf.setVisible(true);
-        this.dispose();
-    }
-
-    private void modificar(int row) {
-        Administrador adm = administradores.get(row);
-        ModificarAdministradorFrame maf = new ModificarAdministradorFrame(adm);
-        maf.setVisible(true);
-        this.dispose();
-    }
-
+//    private void nuevo() {
+//        NuevoAdministradorFrame naf = new NuevoAdministradorFrame();
+//        naf.setVisible(true);
+//        this.dispose();
+//    }
+//    private void modificar(int row) {
+//        Administrador adm = administradores.get(row);
+//        ModificarAdministradorFrame maf = new ModificarAdministradorFrame(adm);
+//        maf.setVisible(true);
+//        this.dispose();
+//    }
     private void limpiarCampos() {
         filtroTxt.setText("");
     }
 
-    private void inactivos() {
-        AbmAdministradoresInactivosFrame adif = new AbmAdministradoresInactivosFrame();
-        adif.setVisible(true);
-        this.dispose();
+    private void activar() {
+        int row = tabla.getSelectedRow();
+        if(row < 0){
+            JOptionPane.showMessageDialog(this, "SELECCIONE ADMINISTRADOR PARA ACTIVAR");
+            return;
+        }
+        Administrador ad = administradores.get(row);
+        ad.setActivo(true);
+        int a = JOptionPane.showConfirmDialog(this, "CONFIRME ACTIVAR ADMINISTRADOR", 
+                "Atención", JOptionPane.YES_NO_OPTION);
+        if(a==0){
+            try {
+                new AdministradorService().updateAdministrador(ad);
+            } catch (Exception ex) {
+                Logger.getLogger(AbmAdministradoresInactivosFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }

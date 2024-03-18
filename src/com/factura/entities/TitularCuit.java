@@ -10,6 +10,7 @@ package com.factura.entities;
  * @author argia
  */
 public class TitularCuit {
+
     private Long id;
     private Integer codigo;
     private String nombreFantasia;
@@ -17,15 +18,15 @@ public class TitularCuit {
     private Domicilio domicilio;
     private String cuit;
     private String iibb;
-    private Integer categoria;
+    private Categoria categoria;
     private String telefono;
     private Boolean activo;
 
     public TitularCuit() {
     }
 
-    public TitularCuit(Long id, Integer codigo, String nombreFantasia, String razonSocial, 
-            Domicilio domicilio, String cuit, String iibb, Integer categoria, 
+    public TitularCuit(Long id, Integer codigo, String nombreFantasia, String razonSocial,
+            Domicilio domicilio, String cuit, String iibb, Categoria categoria,
             String telefono, Boolean activo) {
         this.id = id;
         this.codigo = codigo;
@@ -67,7 +68,7 @@ public class TitularCuit {
         return razonSocial;
     }
 
-    public void setRazonSocial(String razonSocail) {
+    public void setRazonSocial(String razonSocial) {
         this.razonSocial = razonSocial;
     }
 
@@ -95,11 +96,11 @@ public class TitularCuit {
         this.iibb = iibb;
     }
 
-    public Integer getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Integer categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
@@ -118,6 +119,5 @@ public class TitularCuit {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-    
-    
+
 }

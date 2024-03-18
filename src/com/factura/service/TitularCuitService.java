@@ -30,20 +30,33 @@ public class TitularCuitService {
         }
         return titular;
     }
-    
-    public Consorcio updateConsorcio(Consorcio consorcio) throws Exception {
+    */
+    public TitularCuit updateTitularCuit(TitularCuit titular) throws Exception {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
         try {
-            consorcio = new ConsorcioBo().updateConsorcio(consorcio);
+            titular = new TitularCuitBo().updateTitularCuit(titular);
             tx.commit();
         } catch (Exception ex) {
             tx.rollback();
             throw new Exception(ex);
         }
-        return consorcio;
+        return titular;
     }
-    */
+    
+    public TitularCuit saveTitularCuit(TitularCuit titular) throws Exception {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            titular = new TitularCuitBo().saveTitularCuit(titular);
+            tx.commit();
+        } catch (Exception ex) {
+            tx.rollback();
+            throw new Exception(ex);
+        }
+        return titular;
+    }
+    
     public Integer getCodigoSiguiente() throws Exception {
         Integer codigo;
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();

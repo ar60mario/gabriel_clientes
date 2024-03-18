@@ -10,9 +10,9 @@ package com.factura.entities;
  * @author argia
  */
 public class TextoLargoPredeterminado {
+
     private Long id;
     private String textoLargo;
-    private TextoPredeterminado textoPredeterminado;
 
     public TextoLargoPredeterminado() {
     }
@@ -20,7 +20,6 @@ public class TextoLargoPredeterminado {
     public TextoLargoPredeterminado(Long id, String textoLargo, TextoPredeterminado textoPredeterminado) {
         this.id = id;
         this.textoLargo = textoLargo;
-        this.textoPredeterminado = textoPredeterminado;
     }
 
     public Long getId() {
@@ -39,13 +38,4 @@ public class TextoLargoPredeterminado {
         this.textoLargo = textoLargo;
     }
 
-    public TextoPredeterminado getTextoPredeterminado() {
-        return textoPredeterminado;
-    }
-
-    public void setTextoPredeterminado(TextoPredeterminado textoPredeterminado) {
-        this.textoPredeterminado = textoPredeterminado;
-    }
-    
-    
 }

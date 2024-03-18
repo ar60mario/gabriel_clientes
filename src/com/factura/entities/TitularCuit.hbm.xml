@@ -12,13 +12,18 @@
         <property name="razonSocial" type="string" column="RAZON_SOCIAL"/>
         <property name="cuit" type="string" column="CUIT"/>
         <property name="iibb" type="string" column="IIBB"/>
-        <property name="categoria" type="integer" column="CATEGORIA"/>
+        <!--property name="categoria" type="integer" column="CATEGORIA"/-->
         <property name="telefono" type="string" column="TELEFONO"/>
         <property name="activo" type="boolean" column="ACTIVO"/>
         <many-to-one name="domicilio"
                     class="com.factura.entities.Domicilio"
                      lazy="false">
                      <column name="ID_DOMICILIO" not-null="false"/>
+        </many-to-one>
+        <many-to-one name="categoria"
+                    class="com.factura.entities.Categoria"
+                     lazy="false">
+                     <column name="ID_CATEGORIA" not-null="false"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

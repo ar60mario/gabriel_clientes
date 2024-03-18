@@ -10,5 +10,10 @@
         <property name="codigo" type="integer" column="CODIGO"/>
         <property name="descripcion" type="string" column="DESCRIPCION"/>
         <property name="activo" type="boolean" column="ACTIVO"/>
+        <many-to-one name="textoLargoPredeterminado"
+                    class="com.factura.entities.TextoLargoPredeterminado"
+                     lazy="false">
+                     <column name="ID_TEXTO_LARGO_PREDETERMINADO" not-null="false"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>
