@@ -5,6 +5,7 @@
  */
 package com.factura.util;
 
+import javax.swing.JOptionPane;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -25,6 +26,7 @@ public class HibernateUtils {
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(null, "ERROR CONECTION");
             throw new ExceptionInInitializerError(ex);
         }
     }
